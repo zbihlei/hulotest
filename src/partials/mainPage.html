@@ -1,16 +1,39 @@
-<div class="wrapper">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider with Modal</title>
+    <style>
+        /* Ваши стили для слайдера и модального окна */
+    </style>
+</head>
+<body>
     <div class="slider">
-        <div class="slider__item filter">
-            <img src="img/slides/big/02.jpg" alt="">
+        <div class="slides">
+            <!-- Test images -->
+            <div class="slide">
+                <div class="item" data-src="../img/slides/01.jpg"><img src="../img/slides/01.jpg" alt="image"></div>
+                <div class="item" data-src="../img/slides/01.jpg"><img src="../img/slides/01.jpg" alt="image"></div>
+                <div class="item" data-src="../img/slides/01.jpg"><img src="../img/slides/01.jpg" alt="image"></div>
+                <div class="item" data-src="../img/slides/01.jpg"><img src="../img/slides/01.jpg" alt="image"></div>
+            </div>
+            <div class="slide">
+                <div class="item" data-src="../img/slides/01.jpg"><img src="../img/slides/01.jpg" alt="image"></div>
+                <div class="item" data-src="../img/slides/01.jpg"><img src="../img/slides/01.jpg" alt="image"></div>
+                <div class="item" data-src="../img/slides/01.jpg"><img src="../img/slides/01.jpg" alt="image"></div>
+                <div class="item" data-src="../img/slides/01.jpg"><img src="../img/slides/01.jpg" alt="image"></div>
+            </div>
         </div>
-        <div class="slider__item">
-            <img src="img/slides/big/03.jpg" alt="">
-        </div>
-        <div class="slider__item filter">
-            <img src="img/slides/big/04.jpg" alt="">
-        </div>
-        <div class="slider__item">
-            <img src="img/slides/big/05.jpg" alt="">
-        </div>
+        <div class="pagination"></div>
+        <button class="prev"><svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 13L1 7L7 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <button class="next"><svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 13L7 7L1 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
     </div>
-</div>
+
+    <script
