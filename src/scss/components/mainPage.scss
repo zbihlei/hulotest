@@ -2,7 +2,7 @@
 	position: relative;
 	overflow: hidden;
 	background-color: black;
-	width: 800px; /* Adjust width as needed */
+	width: 1180px; /* Adjust width as needed */
 	margin: 50px auto; /* Center the slider and add some space at the top */
   }
   
@@ -17,18 +17,15 @@
 	align-items: center;
 	justify-content: center;
 	font-size: 30px;
-	flex: 0 0 calc(25% - 20px); /* Adjust width and space between slides */
+	flex: 0 0 0; /* Adjust width and space between slides */
 	width: 100%;
 	height: 300px;
   }
   .item{
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: 0 10px;
 	background-color: #fff;
 	height: 100%;
-	width: 400px;
+	width: 100%;
   }
 
   .prev,

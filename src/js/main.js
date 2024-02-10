@@ -1,100 +1,53 @@
-// document.addEventListener("DOMContentLoaded", function () {
-//     const slides = document.querySelector('.slides');
-//     const slideWidth = slides.offsetWidth / 4; // Ширина каждого слайда
-//     const slideCount = 2; // Всего два слайда
-//     const itemCount = 4; // Количество элементов на слайде
-//     let currentIndex = 0;
+fetch('https://api.vimeo.com/videos/824804225', {
+  headers: {
+    'Authorization': 'Bearer 7f6f4cd80bc7643fa09c71fd5a3408ca' 
+  }
+})
+.then(response => {
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return response.json();
+})
+.then(data => {
   
-//     function goToSlide(index) {
-//       if (index < 0) {
-//         index = slideCount - 1; // Если индекс меньше 0, переходим к последнему слайду
-//       } else if (index >= slideCount) {
-//         index = 0; // Если индекс больше или равен количеству слайдов, переходим к первому слайду
-//       }
-//       slides.style.transform = `translateX(-${index * slideWidth * itemCount}px)`;
-//       currentIndex = index;
-//     }
+  const videoUrl = data.embed.html.match(/src="([^"]+)"/)[1];
+
+  const slides = document.querySelector('.slides');
+  for (let i = 0; i < 8; i++) {
+    const slide = document.createElement('div');
+    slide.classList.add('slide');
+    slide.innerHTML = `<div class="item"><iframe src="${videoUrl}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>`;
+    slides.appendChild(slide);
+  }
+
+  const slideWidth = slides.offsetWidth / 4; 
+  const slideCount = 2; 
+  const itemCount = 4; 
+  let currentIndex = 0;
+
+  function goToSlide(index) {
+    if (index < 0) {
+      index = slideCount - itemCount; 
+    } else if (index >= slideCount) {
+      index = 0; 
+    }
+    slides.style.transform = `translateX(-${index * slideWidth * itemCount}px)`;
+    currentIndex = index;
+  }
+
+  function prevSlide() {
+    goToSlide(currentIndex - 1);
+  }
+
+  function nextSlide() {
+    goToSlide(currentIndex + 1);
+  }
+
+  document.querySelector('.prev').addEventListener('click', prevSlide);
+  document.querySelector('.next').addEventListener('click', nextSlide);
+
   
-//     function prevSlide() {
-//       goToSlide(currentIndex - 1);
-//     }
-  
-//     function nextSlide() {
-//       goToSlide(currentIndex + 1);
-//     }
-  
-//     document.querySelector('.prev').addEventListener('click', prevSlide);
-//     document.querySelector('.next').addEventListener('click', nextSlide);
-// });
 
-
-// с окном
-
-document.addEventListener("DOMContentLoaded", function () {
-	const slides = document.querySelector('.slides');
-	const slideWidth = slides.offsetWidth / 4; // Ширина каждого слайда
-	const slideCount = 2; // Всего два слайда
-	const itemCount = 4; // Количество элементов на слайде
-	let currentIndex = 0;
-
-	function goToSlide(index) {
-		if (index < 0) {
-			index = slideCount - 1; // Если индекс меньше 0, переходим к последнему слайду
-		} else if (index >= slideCount) {
-			index = 0; // Если индекс больше или равен количеству слайдов, переходим к первому слайду
-		}
-		slides.style.transform = `translateX(-${index * slideWidth * itemCount}px)`;
-		currentIndex = index;
-	}
-
-	function prevSlide() {
-		goToSlide(currentIndex - 1);
-	}
-
-	function nextSlide() {
-		goToSlide(currentIndex + 1);
-	}
-
-	document.querySelector('.prev').addEventListener('click', prevSlide);
-	document.querySelector('.next').addEventListener('click', nextSlide);
-
-	const items = document.querySelectorAll('.item');
-	items.forEach(item => {
-		item.addEventListener('click', function () {
-			const imageUrl = this.dataset.src;
-			openModal(imageUrl);
-		});
-	});
-
-	function openModal(imageUrl) {
-		const modal = document.createElement('div');
-		modal.classList.add('modal');
-		const modalContent = document.createElement('div');
-		modalContent.classList.add('modal-content');
-		const image = document.createElement('img');
-		image.src = imageUrl;
-		modalContent.appendChild(image);
-		modal.appendChild(modalContent);
-		document.body.appendChild(modal);
-		modal.style.display = 'block';
-
-		modal.addEventListener('click', closeModal);
-		window.addEventListener('keydown', handleKeyPress);
-
-		function closeModal() {
-			modal.removeEventListener('click', closeModal);
-			window.removeEventListener('keydown', handleKeyPress);
-			modal.parentNode.removeChild(modal);
-		}
-
-		function handleKeyPress(event) {
-			if (event.key === 'Escape') {
-				closeModal();
-			}
-		}
-	}
-});
-
-
-
-
+})
+.catch(error => console.error('Error:', error));
